@@ -161,3 +161,83 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+/* NFC Tap Animation - Simplified */
+@keyframes nfcTap {
+  0% {
+    transform: translateX(-10px) scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateX(0px) scale(1.05);
+    opacity: 1;
+    filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.6));
+  }
+  100% {
+    transform: translateX(10px) scale(1);
+    opacity: 0.9;
+  }
+}
+
+@keyframes nfcGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 25px rgba(59, 130, 246, 0.8));
+  }
+}
+
+@keyframes nfcRipple {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.logo-nfc-container {
+  position: relative;
+  display: inline-block;
+}
+
+.logo-nfc-tap {
+  animation: nfcTap 3s ease-in-out infinite;
+  transform-origin: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logo-nfc-tap:hover {
+  animation-duration: 1.5s;
+}
+
+.logo-glow {
+  animation: nfcGlow 2s ease-in-out infinite alternate;
+}
+
+.nfc-ripple {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(59, 130, 246, 0.6);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: nfcRipple 2s infinite;
+  pointer-events: none;
+}
+
+.nfc-ripple:nth-child(2) {
+  animation-delay: 0.5s;
+  border-color: rgba(59, 130, 246, 0.4);
+}
+
+.nfc-ripple:nth-child(3) {
+  animation-delay: 1s;
+  border-color: rgba(59, 130, 246, 0.2);
+}

@@ -2,27 +2,35 @@ import { Star, CheckCircle, TrendingUp, Users, Zap, ArrowRight, Smartphone, Awar
 import { useState, useEffect } from 'react';
 
 const Logo = ({ className = "w-10 h-10" }: { className?: string }) => (
-  <svg viewBox="0 0 100 100" className={className} xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="tapGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" style={{ stopColor: '#3B82F6', stopOpacity: 1 }} />
-        <stop offset="100%" style={{ stopColor: '#1D4ED8', stopOpacity: 1 }} />
-      </linearGradient>
-    </defs>
+  <div className="logo-nfc-container">
+    {/* Ripple effects */}
+    <div className="nfc-ripple"></div>
+    <div className="nfc-ripple"></div>
+    <div className="nfc-ripple"></div>
+    
+    {/* Main logo with tap animation */}
+    <svg viewBox="0 0 100 100" className={`logo-nfc-tap logo-glow ${className}`} xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="tapGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style={{ stopColor: '#3B82F6', stopOpacity: 1 }} />
+          <stop offset="100%" style={{ stopColor: '#1D4ED8', stopOpacity: 1 }} />
+        </linearGradient>
+      </defs>
 
-    {/* T shape - modern and bold */}
-    <rect x="15" y="15" width="35" height="8" rx="4" fill="url(#tapGradient)" />
-    <rect x="28" y="15" width="10" height="50" rx="5" fill="url(#tapGradient)" />
+      {/* T shape - modern and bold */}
+      <rect x="15" y="15" width="35" height="8" rx="4" fill="url(#tapGradient)" />
+      <rect x="28" y="15" width="10" height="50" rx="5" fill="url(#tapGradient)" />
 
-    {/* A shape - stylized triangle with cutout */}
-    <path d="M 55 65 L 70 20 L 85 65 L 78 65 L 70 40 L 62 65 Z" fill="url(#tapGradient)" />
+      {/* A shape - stylized triangle with cutout */}
+      <path d="M 55 65 L 70 20 L 85 65 L 78 65 L 70 40 L 62 65 Z" fill="url(#tapGradient)" />
 
-    {/* NFC wave signal emanating */}
-    <circle cx="33" cy="75" r="3" fill="#3B82F6" opacity="0.8" />
-    <path d="M 38 75 Q 43 70, 48 75" stroke="#3B82F6" strokeWidth="2" fill="none" opacity="0.6" strokeLinecap="round" />
-    <path d="M 41 75 Q 48 67, 55 75" stroke="#3B82F6" strokeWidth="2" fill="none" opacity="0.4" strokeLinecap="round" />
-    <path d="M 44 75 Q 53 64, 62 75" stroke="#3B82F6" strokeWidth="2" fill="none" opacity="0.2" strokeLinecap="round" />
-  </svg>
+      {/* NFC wave signal emanating */}
+      <circle cx="33" cy="75" r="3" fill="#3B82F6" opacity="0.9" />
+      <path d="M 38 75 Q 43 70, 48 75" stroke="#3B82F6" strokeWidth="2" fill="none" opacity="0.7" strokeLinecap="round" />
+      <path d="M 41 75 Q 48 67, 55 75" stroke="#3B82F6" strokeWidth="2" fill="none" opacity="0.5" strokeLinecap="round" />
+      <path d="M 44 75 Q 53 64, 62 75" stroke="#3B82F6" strokeWidth="2" fill="none" opacity="0.3" strokeLinecap="round" />
+    </svg>
+  </div>
 );
 
 // Floating particles component
