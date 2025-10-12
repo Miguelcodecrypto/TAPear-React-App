@@ -324,20 +324,20 @@ function App() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-6 max-w-7xl mx-auto pt-8">
             {/* Basic Card */}
-            <div className="bg-white p-8 rounded-2xl shadow-sm border-2 border-slate-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-              <div className="text-center mb-6">
+            <div className="bg-white p-8 rounded-2xl shadow-sm border-2 border-slate-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 flex flex-col">
+              <div className="text-center mb-6 h-20 flex flex-col justify-center">
                 <h3 className="text-2xl font-bold text-slate-900 mb-2">TAPear Card</h3>
                 <p className="text-slate-600">Perfecto para empezar</p>
               </div>
 
-              <div className="text-center mb-6">
-                <div className="text-5xl font-bold text-slate-900 mb-2">€60</div>
-                <p className="text-slate-500">Pago único</p>
+              <div className="text-center mb-6 h-24 flex flex-col justify-center">
+                <div className="text-5xl font-bold text-slate-900 mb-2">€59</div>
+                <p className="text-slate-500">1 Dispositivo TAPear</p>
               </div>
 
-              <ul className="space-y-3 mb-8">
+              <ul className="space-y-3 mb-8 flex-grow">
                 <li className="flex items-start space-x-3">
                   <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
                   <span className="text-slate-700">Tarjeta NFC premium</span>
@@ -356,30 +356,24 @@ function App() {
                 </li>
               </ul>
 
-              <button className="w-full bg-slate-900 text-white py-3 rounded-lg font-semibold hover:bg-slate-800 transition-all duration-200">
+              <button className="w-full bg-slate-900 text-white py-3 rounded-lg font-semibold hover:bg-slate-800 transition-all duration-200 mt-auto">
                 Comprar Ahora
               </button>
             </div>
 
-            {/* Stand Card - Featured */}
-            <div className="bg-gradient-to-br from-blue-600 to-blue-700 p-8 rounded-2xl shadow-xl border-2 border-blue-500 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 relative">
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <span className="bg-yellow-400 text-slate-900 px-4 py-1 rounded-full text-sm font-bold">
-                  MÁS POPULAR
-                </span>
-              </div>
-
-              <div className="text-center mb-6">
+            {/* Stand Card */}
+            <div className="bg-gradient-to-br from-blue-600 to-blue-700 p-8 rounded-2xl shadow-xl border-2 border-blue-500 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 flex flex-col">
+              <div className="text-center mb-6 h-20 flex flex-col justify-center">
                 <h3 className="text-2xl font-bold text-white mb-2">TAPear Stand</h3>
                 <p className="text-blue-100">Ideal para mostrador</p>
               </div>
 
-              <div className="text-center mb-6">
-                <div className="text-5xl font-bold text-white mb-2">€80</div>
-                <p className="text-blue-100">Pago único</p>
+              <div className="text-center mb-6 h-24 flex flex-col justify-center">
+                <div className="text-5xl font-bold text-white mb-2">€79</div>
+                <p className="text-blue-100">1 Dispositivo TAPear Stand</p>
               </div>
 
-              <ul className="space-y-3 mb-8">
+              <ul className="space-y-3 mb-8 flex-grow">
                 <li className="flex items-start space-x-3">
                   <CheckCircle className="w-5 h-5 text-yellow-300 flex-shrink-0 mt-0.5" />
                   <span className="text-white">Stand acrílico premium</span>
@@ -396,54 +390,133 @@ function App() {
                   <CheckCircle className="w-5 h-5 text-yellow-300 flex-shrink-0 mt-0.5" />
                   <span className="text-white">Dashboard avanzado</span>
                 </li>
-                <li className="flex items-start space-x-3">
-                  <CheckCircle className="w-5 h-5 text-yellow-300 flex-shrink-0 mt-0.5" />
-                  <span className="text-white">Analytics en tiempo real</span>
-                </li>
+                
               </ul>
 
-              <button className="w-full bg-white text-blue-600 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-all duration-200">
+              <button className="w-full bg-white text-blue-600 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-all duration-200 mt-auto">
                 Comprar Ahora
               </button>
             </div>
 
-            {/* Pro Card */}
-            <div className="bg-white p-8 rounded-2xl shadow-sm border-2 border-slate-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-              <div className="text-center mb-6">
-                <h3 className="text-2xl font-bold text-slate-900 mb-2">TAPear Pro</h3>
-                <p className="text-slate-600">Para múltiples ubicaciones</p>
+            {/* Pack 5 TAPear - MÁS POPULAR */}
+            <div className="bg-white p-8 rounded-2xl shadow-sm border-2 border-slate-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 relative flex flex-col">
+              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-20">
+                <span className="bg-yellow-400 text-slate-900 px-3 py-1 rounded-full text-xs font-bold shadow-lg whitespace-nowrap">
+                  MÁS POPULAR
+                </span>
               </div>
 
-              <div className="text-center mb-6">
+              <div className="text-center mb-6 mt-2 h-20 flex flex-col justify-center">
+                <h3 className="text-2xl font-bold text-slate-900 mb-2">Pack 5 TAPear</h3>
+                <p className="text-slate-600">Ideal para múltiples ubicaciones</p>
+              </div>
+
+              <div className="text-center mb-6 h-24 flex flex-col justify-center">
                 <div className="text-5xl font-bold text-slate-900 mb-2">€199</div>
-                <p className="text-slate-500">Pack de 5 stands</p>
+                <p className="text-slate-500">5 dispositivos TAPear</p>
+                
               </div>
 
-              <ul className="space-y-3 mb-8">
+              <ul className="space-y-3 mb-8 flex-grow">
                 <li className="flex items-start space-x-3">
                   <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">5 stands premium</span>
+                  <span className="text-slate-700">5 dispositivos TAPear</span>
                 </li>
                 <li className="flex items-start space-x-3">
                   <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Gestión centralizada</span>
+                  <span className="text-slate-700">Diseños personalizables</span>
                 </li>
                 <li className="flex items-start space-x-3">
                   <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Reportes avanzados</span>
+                  <span className="text-slate-700">Dashboard centralizado</span>
                 </li>
+                
+                
                 <li className="flex items-start space-x-3">
                   <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Soporte prioritario</span>
-                </li>
-                <li className="flex items-start space-x-3">
-                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">API de integración</span>
+                  <span className="text-slate-700">Gestión multi-ubicación</span>
                 </li>
               </ul>
 
-              <button className="w-full bg-slate-900 text-white py-3 rounded-lg font-semibold hover:bg-slate-800 transition-all duration-200">
-                Comprar Ahora
+              <button className="w-full bg-slate-900 text-white py-3 rounded-lg font-semibold hover:bg-slate-800 transition-all duration-200 mt-auto">
+                Comprar Pack
+              </button>
+            </div>
+
+            {/* Pack 10 TAPear - Enterprise */}
+            <div className="bg-gradient-to-br from-purple-600 to-purple-700 p-8 rounded-2xl shadow-xl border-2 border-purple-500 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 relative flex flex-col">
+              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-20">
+                <span className="bg-yellow-400 text-slate-900 px-3 py-1 rounded-full text-xs font-bold shadow-lg whitespace-nowrap">
+                  MEJOR OFERTA
+                </span>
+              </div>
+
+              <div className="text-center mb-6 mt-2 h-20 flex flex-col justify-center">
+                <h3 className="text-2xl font-bold text-white mb-2">Pack 10 TAPear</h3>
+                <p className="text-purple-100">Solución más económica</p>
+              </div>
+              
+
+              <div className="text-center mb-6 h-24 flex flex-col justify-center">
+                <div className="text-5xl font-bold text-white mb-2">€299</div>
+                <p className="text-purple-100">10 dispositivos TAPear</p>
+              </div>
+
+              <ul className="space-y-3 mb-8 flex-grow">
+                <li className="flex items-start space-x-3">
+                  <CheckCircle className="w-5 h-5 text-yellow-300 flex-shrink-0 mt-0.5" />
+                  <span className="text-white">10 dispositivos TAPear</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <CheckCircle className="w-5 h-5 text-yellow-300 flex-shrink-0 mt-0.5" />
+                  <span className="text-white">Soporte técnico prioritario</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <CheckCircle className="w-5 h-5 text-yellow-300 flex-shrink-0 mt-0.5" />
+                  <span className="text-white">Diseños personalizables</span>
+                </li>
+              
+              </ul>
+
+              <button className="w-full bg-white text-purple-600 py-3 rounded-lg font-semibold hover:bg-purple-50 transition-all duration-200 mt-auto">
+                Comprar Pack Enterprise
+              </button>
+            </div>
+
+            {/* Pack 5 TAPear Stand */}
+            <div className="bg-gradient-to-br from-emerald-600 to-emerald-700 p-8 rounded-2xl shadow-xl border-2 border-emerald-500 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 relative flex flex-col">
+              <div className="text-center mb-6 h-20 flex flex-col justify-center">
+                <h3 className="text-2xl font-bold text-white mb-2">Pack 5 TAPear Stand</h3>
+                <p className="text-emerald-100">Ideal para negocios</p>
+              </div>
+
+              <div className="text-center mb-6 h-24 flex flex-col justify-center">
+                <div className="text-5xl font-bold text-white mb-2">€249</div>
+                <p className="text-emerald-100">5 TAPear Stand</p>
+              </div>
+
+              <ul className="space-y-3 mb-8 flex-grow">
+                <li className="flex items-start space-x-3">
+                  <CheckCircle className="w-5 h-5 text-yellow-300 flex-shrink-0 mt-0.5" />
+                  <span className="text-white">5 TAPear Stand premium</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <CheckCircle className="w-5 h-5 text-yellow-300 flex-shrink-0 mt-0.5" />
+                  <span className="text-white">Base estable incluida</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <CheckCircle className="w-5 h-5 text-yellow-300 flex-shrink-0 mt-0.5" />
+                  <span className="text-white">Diseños personalizables</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <CheckCircle className="w-5 h-5 text-yellow-300 flex-shrink-0 mt-0.5" />
+                  <span className="text-white">Soporte técnico incluido</span>
+                </li>
+                
+              </ul>
+
+              <button className="w-full bg-white text-emerald-600 py-3 rounded-lg font-semibold hover:bg-emerald-50 transition-all duration-200 mt-auto">
+                Comprar Pack Stand
               </button>
             </div>
           </div>
