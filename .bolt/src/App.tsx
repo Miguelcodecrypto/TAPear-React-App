@@ -1,5 +1,5 @@
 import { Star, CheckCircle, TrendingUp, Users, Zap, ArrowRight, Smartphone, Award, ShoppingCart, CreditCard } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const Logo = ({ className = "w-10 h-10" }: { className?: string }) => (
   <svg viewBox="0 0 100 100" className={className} xmlns="http://www.w3.org/2000/svg">
@@ -25,158 +25,202 @@ const Logo = ({ className = "w-10 h-10" }: { className?: string }) => (
   </svg>
 );
 
+// Floating particles component
+const FloatingParticles = () => {
+  const [particles, setParticles] = useState<Array<{
+    id: number;
+    size: number;
+    left: number;
+    animationDelay: number;
+    duration: number;
+  }>>([]);
+
+  useEffect(() => {
+    const generateParticles = () => {
+      const newParticles = [];
+      for (let i = 0; i < 15; i++) {
+        newParticles.push({
+          id: i,
+          size: Math.random() * 100 + 50, // 50-150px
+          left: Math.random() * 100, // 0-100%
+          animationDelay: Math.random() * 20, // 0-20s
+          duration: Math.random() * 10 + 15, // 15-25s
+        });
+      }
+      setParticles(newParticles);
+    };
+
+    generateParticles();
+  }, []);
+
+  return (
+    <div className="floating-shapes">
+      {particles.map((particle) => (
+        <div
+          key={particle.id}
+          className="floating-shape"
+          style={{
+            width: `${particle.size}px`,
+            height: `${particle.size}px`,
+            left: `${particle.left}%`,
+            animationDelay: `${particle.animationDelay}s`,
+            animationDuration: `${particle.duration}s`,
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
 function App() {
-  const [email, setEmail] = useState('');
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Email submitted:', email);
-    setEmail('');
-    alert('¡Gracias! Te contactaremos pronto.');
-  };
-
   const scrollToProducts = () => {
     document.getElementById('productos')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-3">
-              <Logo className="w-10 h-10" />
-              <span className="text-2xl font-bold text-slate-900">TAPear</span>
-            </div>
-            <button
-              onClick={scrollToProducts}
-              className="bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition-all duration-200 hover:shadow-lg"
-            >
-              Ver Productos
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center space-x-2 bg-blue-50 text-blue-700 px-4 py-2 rounded-full mb-6 border border-blue-100">
-              <Zap className="w-4 h-4" />
-              <span className="text-sm font-medium">Tecnología NFC para reseñas instantáneas</span>
-            </div>
-
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-slate-900 mb-6 leading-tight">
-              Un TAP, Miles de
-              <span className="text-blue-600"> Reseñas</span>
-            </h1>
-
-            <p className="text-xl text-slate-600 mb-10 leading-relaxed">
-              El dispositivo NFC inteligente que convierte cada cliente satisfecho en una reseña positiva.
-              Simple, rápido y efectivo.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
+    <div className="min-h-screen relative">
+      {/* Animated Background */}
+      <div className="fixed inset-0 animated-bg"></div>
+      <FloatingParticles />
+      
+      {/* Content Overlay */}
+      <div className="relative z-10">
+        {/* Navigation */}
+        <nav className="fixed top-0 w-full glassmorphism z-50 border-b border-white/20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between items-center h-16">
+              <div className="flex items-center space-x-3">
+                <Logo className="w-10 h-10" />
+                <span className="text-2xl font-bold text-white drop-shadow-lg">TAPear</span>
+              </div>
               <button
                 onClick={scrollToProducts}
-                className="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-200 flex items-center justify-center space-x-2 hover:shadow-xl hover:scale-105"
+                className="bg-white/20 backdrop-blur-sm text-white px-6 py-2 rounded-lg font-medium hover:bg-white/30 transition-all duration-200 hover:shadow-lg border border-white/30"
               >
-                <ShoppingCart className="w-5 h-5" />
-                <span>Comprar Dispositivo</span>
-              </button>
-              <button
-                className="bg-white text-slate-900 px-8 py-4 rounded-lg font-semibold border-2 border-slate-200 hover:border-blue-500 transition-all duration-200 flex items-center justify-center space-x-2"
-              >
-                <span>Ver Demo</span>
-                <ArrowRight className="w-5 h-5" />
+                Ver Productos
               </button>
             </div>
-
-            <p className="text-sm text-slate-500">
-              ✓ Envío gratis · ✓ Configuración en 5 minutos · ✓ Sin mensualidades
-            </p>
           </div>
-        </div>
-      </section>
+        </nav>
 
-      {/* Stats Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white border-y border-slate-100">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-4xl font-bold text-blue-600 mb-2">15,000+</div>
-              <div className="text-slate-600">Dispositivos Activos</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-blue-600 mb-2">2 seg</div>
-              <div className="text-slate-600">Para Dejar Reseña</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-blue-600 mb-2">85%</div>
-              <div className="text-slate-600">Tasa de Conversión</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-blue-600 mb-2">5x</div>
-              <div className="text-slate-600">Más Reseñas al Mes</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Why Reviews Matter Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 to-slate-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-slate-900 mb-4">
-              Por Qué las Reseñas Importan
-            </h2>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-              Las reseñas son el motor de crecimiento más poderoso para tu negocio
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-white p-6 rounded-xl border-2 border-blue-100">
-              <div className="text-3xl font-bold text-blue-600 mb-2">93%</div>
-              <p className="text-slate-700">de consumidores leen reseñas antes de comprar</p>
-            </div>
-            <div className="bg-white p-6 rounded-xl border-2 border-green-100">
-              <div className="text-3xl font-bold text-green-600 mb-2">+31%</div>
-              <p className="text-slate-700">más ganancias con buenas reseñas online</p>
-            </div>
-            <div className="bg-white p-6 rounded-xl border-2 border-orange-100">
-              <div className="text-3xl font-bold text-orange-600 mb-2">4.3★</div>
-              <p className="text-slate-700">calificación mínima para ser considerado confiable</p>
-            </div>
-            <div className="bg-white p-6 rounded-xl border-2 border-purple-100">
-              <div className="text-3xl font-bold text-purple-600 mb-2">72%</div>
-              <p className="text-slate-700">confían más en un negocio con reseñas recientes</p>
-            </div>
-          </div>
-
-          <div className="mt-12 bg-white p-8 rounded-2xl shadow-lg border border-slate-100">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-              <div>
-                <Award className="w-12 h-12 text-blue-600 mx-auto mb-4" />
-                <h3 className="font-bold text-slate-900 mb-2">Mayor Credibilidad</h3>
-                <p className="text-slate-600 text-sm">Las reseñas generan confianza inmediata en nuevos clientes</p>
+        {/* Hero Section */}
+        <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center max-w-3xl mx-auto">
+              <div className="inline-flex items-center space-x-2 glassmorphism text-white px-4 py-2 rounded-full mb-6 border border-white/30">
+                <Zap className="w-4 h-4" />
+                <span className="text-sm font-medium">Tecnología NFC para reseñas instantáneas</span>
               </div>
-              <div>
-                <TrendingUp className="w-12 h-12 text-green-600 mx-auto mb-4" />
-                <h3 className="font-bold text-slate-900 mb-2">Mejor Posicionamiento</h3>
-                <p className="text-slate-600 text-sm">Google prioriza negocios con más reseñas positivas</p>
+
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-2xl">
+                Un TAP, Miles de
+                <span className="gradient-text"> Reseñas</span>
+              </h1>
+
+              <p className="text-xl text-white/90 mb-10 leading-relaxed drop-shadow-lg">
+                El dispositivo NFC inteligente que convierte cada cliente satisfecho en una reseña positiva.
+                Simple, rápido y efectivo.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
+                <button
+                  onClick={scrollToProducts}
+                  className="glassmorphism text-white px-8 py-4 rounded-lg font-semibold hover:bg-white/30 transition-all duration-200 flex items-center justify-center space-x-2 hover:shadow-xl hover:scale-105 shimmer-effect"
+                >
+                  <ShoppingCart className="w-5 h-5" />
+                  <span>Comprar Dispositivo</span>
+                </button>
+                <button
+                  className="bg-white/20 backdrop-blur-sm text-white px-8 py-4 rounded-lg font-semibold border-2 border-white/30 hover:bg-white/30 transition-all duration-200 flex items-center justify-center space-x-2"
+                >
+                  <span>Ver Demo</span>
+                  <ArrowRight className="w-5 h-5" />
+                </button>
               </div>
-              <div>
-                <Users className="w-12 h-12 text-orange-600 mx-auto mb-4" />
-                <h3 className="font-bold text-slate-900 mb-2">Más Clientes</h3>
-                <p className="text-slate-600 text-sm">Cada reseña positiva atrae nuevos compradores</p>
+
+              <p className="text-sm text-white/80">
+                ✓ Envío gratis · ✓ Configuración en 5 minutos · ✓ Sin mensualidades
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Stats Section */}
+        <section className="py-16 px-4 sm:px-6 lg:px-8 glassmorphism border-y border-white/20">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+              <div className="card-hover">
+                <div className="text-4xl font-bold text-white mb-2 drop-shadow-lg">15,000+</div>
+                <div className="text-white/80">Dispositivos Activos</div>
+              </div>
+              <div className="card-hover">
+                <div className="text-4xl font-bold text-white mb-2 drop-shadow-lg">2 seg</div>
+                <div className="text-white/80">Para Dejar Reseña</div>
+              </div>
+              <div className="card-hover">
+                <div className="text-4xl font-bold text-white mb-2 drop-shadow-lg">85%</div>
+                <div className="text-white/80">Tasa de Conversión</div>
+              </div>
+              <div className="card-hover">
+                <div className="text-4xl font-bold text-white mb-2 drop-shadow-lg">5x</div>
+                <div className="text-white/80">Más Reseñas al Mes</div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+
+        {/* Why Reviews Matter Section */}
+        <section className="py-20 px-4 sm:px-6 lg:px-8 animated-bg-alt">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-white mb-4 drop-shadow-lg">
+                Por Qué las Reseñas Importan
+              </h2>
+              <p className="text-xl text-white/90 max-w-2xl mx-auto">
+                Las reseñas son el motor de crecimiento más poderoso para tu negocio
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="glassmorphism p-6 rounded-xl border border-white/20 card-hover">
+                <div className="text-3xl font-bold text-white mb-2 drop-shadow-lg">93%</div>
+                <p className="text-white/90">de consumidores leen reseñas antes de comprar</p>
+              </div>
+              <div className="glassmorphism p-6 rounded-xl border border-white/20 card-hover">
+                <div className="text-3xl font-bold text-white mb-2 drop-shadow-lg">+31%</div>
+                <p className="text-white/90">más ganancias con buenas reseñas online</p>
+              </div>
+              <div className="glassmorphism p-6 rounded-xl border border-white/20 card-hover">
+                <div className="text-3xl font-bold text-white mb-2 drop-shadow-lg">4.3★</div>
+                <p className="text-white/90">calificación mínima para ser considerado confiable</p>
+              </div>
+              <div className="glassmorphism p-6 rounded-xl border border-white/20 card-hover">
+                <div className="text-3xl font-bold text-white mb-2 drop-shadow-lg">72%</div>
+                <p className="text-white/90">confían más en un negocio con reseñas recientes</p>
+              </div>
+            </div>
+
+            <div className="mt-12 glassmorphism p-8 rounded-2xl shadow-lg border border-white/20">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div className="card-hover">
+                  <Award className="w-12 h-12 text-white mx-auto mb-4 drop-shadow-lg" />
+                  <h3 className="font-bold text-white mb-2">Mayor Credibilidad</h3>
+                  <p className="text-white/80 text-sm">Las reseñas generan confianza inmediata en nuevos clientes</p>
+                </div>
+                <div className="card-hover">
+                  <TrendingUp className="w-12 h-12 text-white mx-auto mb-4 drop-shadow-lg" />
+                  <h3 className="font-bold text-white mb-2">Mejor Posicionamiento</h3>
+                  <p className="text-white/80 text-sm">Google prioriza negocios con más reseñas positivas</p>
+                </div>
+                <div className="card-hover">
+                  <Users className="w-12 h-12 text-white mx-auto mb-4 drop-shadow-lg" />
+                  <h3 className="font-bold text-white mb-2">Más Clientes</h3>
+                  <p className="text-white/80 text-sm">Cada reseña positiva atrae nuevos compradores</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
       {/* How It Works Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
@@ -522,11 +566,12 @@ function App() {
           <p className="text-slate-400 mb-4">
             Transformando reseñas en resultados desde 2024
           </p>
-          <p className="text-sm text-slate-500">
+          <p className="text-sm text-white/80">
             © 2024 TAPear Review. Todos los derechos reservados MoCa&investment sl
           </p>
         </div>
       </footer>
+      </div>
     </div>
   );
 }
