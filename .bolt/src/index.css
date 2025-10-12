@@ -1,3 +1,233 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Sky gradient animation */
+@keyframes skyGradient {
+  0% {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 25%, #60a5fa 50%, #93c5fd 75%, #dbeafe 100%);
+  }
+  25% {
+    background: linear-gradient(135deg, #1e40af 0%, #2563eb 25%, #3b82f6 50%, #60a5fa 75%, #bfdbfe 100%);
+  }
+  50% {
+    background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 25%, #3b82f6 50%, #60a5fa 75%, #dbeafe 100%);
+  }
+  75% {
+    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 25%, #60a5fa 50%, #93c5fd 75%, #e0e7ff 100%);
+  }
+  100% {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 25%, #60a5fa 50%, #93c5fd 75%, #dbeafe 100%);
+  }
+}
+
+/* Star falling animation */
+@keyframes starFall {
+  0% {
+    transform: translateY(-100vh) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) translateX(100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes starFall2 {
+  0% {
+    transform: translateY(-100vh) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) translateX(-50px) rotate(-360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes starFall3 {
+  0% {
+    transform: translateY(-100vh) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) translateX(75px) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+/* Star sparkle effect */
+@keyframes sparkle {
+  0%, 100% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+/* NFC Logo Animations */
+@keyframes nfcPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+@keyframes nfcRipple {
+  0% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0.1;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes nfcGlow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(251, 191, 36, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.6), 0 0 30px rgba(251, 191, 36, 0.4);
+  }
+}
+
+/* Background classes */
+.sky-gradient {
+  animation: skyGradient 20s ease-in-out infinite;
+}
+
+.falling-star {
+  position: absolute;
+  color: #fbbf24;
+  filter: drop-shadow(0 0 6px #fbbf24);
+}
+
+.falling-star:nth-child(1) {
+  left: 10%;
+  animation: starFall 8s linear infinite;
+  animation-delay: 0s;
+  font-size: 16px;
+}
+
+.falling-star:nth-child(2) {
+  left: 25%;
+  animation: starFall2 12s linear infinite;
+  animation-delay: 2s;
+  font-size: 14px;
+}
+
+.falling-star:nth-child(3) {
+  left: 40%;
+  animation: starFall 10s linear infinite;
+  animation-delay: 4s;
+  font-size: 18px;
+}
+
+.falling-star:nth-child(4) {
+  left: 60%;
+  animation: starFall3 9s linear infinite;
+  animation-delay: 1s;
+  font-size: 15px;
+}
+
+.falling-star:nth-child(5) {
+  left: 75%;
+  animation: starFall2 11s linear infinite;
+  animation-delay: 3s;
+  font-size: 16px;
+}
+
+.falling-star:nth-child(6) {
+  left: 85%;
+  animation: starFall 13s linear infinite;
+  animation-delay: 5s;
+  font-size: 14px;
+}
+
+.falling-star:nth-child(7) {
+  left: 15%;
+  animation: starFall3 14s linear infinite;
+  animation-delay: 6s;
+  font-size: 17px;
+}
+
+.falling-star:nth-child(8) {
+  left: 30%;
+  animation: starFall2 9s linear infinite;
+  animation-delay: 2.5s;
+  font-size: 15px;
+}
+
+.falling-star:nth-child(9) {
+  left: 50%;
+  animation: starFall 15s linear infinite;
+  animation-delay: 4.5s;
+  font-size: 16px;
+}
+
+.falling-star:nth-child(10) {
+  left: 70%;
+  animation: starFall3 10s linear infinite;
+  animation-delay: 1.5s;
+  font-size: 14px;
+}
+
+/* Static stars for ambiance */
+.static-star {
+  position: absolute;
+  color: #fbbf24;
+  animation: sparkle 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 4px #fbbf24);
+}
+
+.static-star:nth-child(odd) {
+  animation-delay: 0s;
+}
+
+.static-star:nth-child(even) {
+  animation-delay: 1.5s;
+}
+
+/* NFC Logo Animation Classes */
+.nfc-pulse {
+  animation: nfcPulse 2s ease-in-out infinite;
+}
+
+.nfc-ripple {
+  animation: nfcRipple 3s ease-out infinite;
+}
+
+.nfc-glow {
+  animation: nfcGlow 2s ease-in-out infinite;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.1) 0%, transparent 70%);
+}

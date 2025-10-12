@@ -1,29 +1,82 @@
 import { Star, CheckCircle, TrendingUp, Users, Zap, ArrowRight, Smartphone, Award, ShoppingCart, CreditCard } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const Logo = ({ className = "w-10 h-10" }: { className?: string }) => (
-  <svg viewBox="0 0 100 100" className={className} xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="tapGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" style={{ stopColor: '#3B82F6', stopOpacity: 1 }} />
-        <stop offset="100%" style={{ stopColor: '#1D4ED8', stopOpacity: 1 }} />
-      </linearGradient>
-    </defs>
+  <div className="relative group cursor-pointer">
+    <svg viewBox="0 0 100 100" className={`${className} filter drop-shadow-lg transition-transform duration-300 group-hover:scale-110`} xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="tapGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style={{ stopColor: '#ffffff', stopOpacity: 1 }} />
+          <stop offset="100%" style={{ stopColor: '#f8fafc', stopOpacity: 1 }} />
+        </linearGradient>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+          <feMerge> 
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
 
-    {/* T shape - modern and bold */}
-    <rect x="15" y="15" width="35" height="8" rx="4" fill="url(#tapGradient)" />
-    <rect x="28" y="15" width="10" height="50" rx="5" fill="url(#tapGradient)" />
+      {/* T shape - modern and bold */}
+      <rect x="15" y="15" width="35" height="8" rx="4" fill="url(#tapGradient)" filter="url(#glow)" />
+      <rect x="28" y="15" width="10" height="50" rx="5" fill="url(#tapGradient)" filter="url(#glow)" />
 
-    {/* A shape - stylized triangle with cutout */}
-    <path d="M 55 65 L 70 20 L 85 65 L 78 65 L 70 40 L 62 65 Z" fill="url(#tapGradient)" />
+      {/* A shape - stylized triangle with cutout */}
+      <path d="M 55 65 L 70 20 L 85 65 L 78 65 L 70 40 L 62 65 Z" fill="url(#tapGradient)" filter="url(#glow)" />
 
-    {/* NFC wave signal emanating */}
-    <circle cx="33" cy="75" r="3" fill="#3B82F6" opacity="0.8" />
-    <path d="M 38 75 Q 43 70, 48 75" stroke="#3B82F6" strokeWidth="2" fill="none" opacity="0.6" strokeLinecap="round" />
-    <path d="M 41 75 Q 48 67, 55 75" stroke="#3B82F6" strokeWidth="2" fill="none" opacity="0.4" strokeLinecap="round" />
-    <path d="M 44 75 Q 53 64, 62 75" stroke="#3B82F6" strokeWidth="2" fill="none" opacity="0.2" strokeLinecap="round" />
-  </svg>
+      {/* NFC wave signal emanating */}
+      <circle cx="33" cy="75" r="3" fill="#fbbf24" opacity="0.8" className="nfc-pulse" />
+      <path d="M 38 75 Q 43 70, 48 75" stroke="#fbbf24" strokeWidth="2" fill="none" opacity="0.6" strokeLinecap="round" className="nfc-ripple" />
+      <path d="M 41 75 Q 48 67, 55 75" stroke="#fbbf24" strokeWidth="2" fill="none" opacity="0.4" strokeLinecap="round" className="nfc-ripple" style={{animationDelay: '0.5s'}} />
+      <path d="M 44 75 Q 53 64, 62 75" stroke="#fbbf24" strokeWidth="2" fill="none" opacity="0.2" strokeLinecap="round" className="nfc-ripple" style={{animationDelay: '1s'}} />
+    </svg>
+    
+    {/* Interactive ripple effects */}
+    <div className="absolute inset-0 rounded-full nfc-glow group-hover:animate-ping"></div>
+  </div>
 );
+
+const FallingStars = () => {
+  const [staticStars, setStaticStars] = useState<Array<{id: number, left: string, top: string, size: string}>>([]);
+
+  useEffect(() => {
+    // Generate random static stars for ambiance
+    const stars = [];
+    for (let i = 0; i < 15; i++) {
+      stars.push({
+        id: i,
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 60}%`, // Only in upper part of screen
+        size: `${12 + Math.random() * 8}px`
+      });
+    }
+    setStaticStars(stars);
+  }, []);
+
+  return (
+    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+      {/* Falling stars */}
+      {[...Array(10)].map((_, i) => (
+        <Star key={`falling-${i}`} className="falling-star" size={16} />
+      ))}
+      
+      {/* Static twinkling stars */}
+      {staticStars.map((star) => (
+        <Star 
+          key={`static-${star.id}`} 
+          className="static-star" 
+          style={{
+            left: star.left,
+            top: star.top,
+            fontSize: star.size
+          }}
+          size={14}
+        />
+      ))}
+    </div>
+  );
+};
 
 function App() {
   const [email, setEmail] = useState('');
@@ -40,18 +93,21 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <div className="min-h-screen sky-gradient relative">
+      {/* Falling Stars Background */}
+      <FallingStars />
+      
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-slate-200">
+      <nav className="fixed top-0 w-full bg-white/10 backdrop-blur-md z-50 border-b border-white/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-3">
-              <Logo className="w-10 h-10" />
-              <span className="text-2xl font-bold text-slate-900">TAPear</span>
+              <Logo className="w-12 h-12" />
+              <span className="text-2xl font-bold text-white drop-shadow-lg">TAPear</span>
             </div>
             <button
               onClick={scrollToProducts}
-              className="bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition-all duration-200 hover:shadow-lg"
+              className="bg-white/20 text-white px-6 py-2 rounded-lg font-medium hover:bg-white/30 transition-all duration-200 hover:shadow-lg backdrop-blur-sm border border-white/20"
             >
               Ver Productos
             </button>
@@ -60,20 +116,20 @@ function App() {
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center space-x-2 bg-blue-50 text-blue-700 px-4 py-2 rounded-full mb-6 border border-blue-100">
+            <div className="inline-flex items-center space-x-2 bg-white/20 text-white px-4 py-2 rounded-full mb-6 border border-white/30 backdrop-blur-sm">
               <Zap className="w-4 h-4" />
               <span className="text-sm font-medium">Tecnología NFC para reseñas instantáneas</span>
             </div>
 
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-slate-900 mb-6 leading-tight">
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
               Un TAP, Miles de
-              <span className="text-blue-600"> Reseñas</span>
+              <span className="text-yellow-300"> Reseñas</span>
             </h1>
 
-            <p className="text-xl text-slate-600 mb-10 leading-relaxed">
+            <p className="text-xl text-white/90 mb-10 leading-relaxed drop-shadow-md">
               El dispositivo NFC inteligente que convierte cada cliente satisfecho en una reseña positiva.
               Simple, rápido y efectivo.
             </p>
@@ -81,20 +137,20 @@ function App() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
               <button
                 onClick={scrollToProducts}
-                className="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-200 flex items-center justify-center space-x-2 hover:shadow-xl hover:scale-105"
+                className="bg-white/20 text-white px-8 py-4 rounded-lg font-semibold hover:bg-white/30 transition-all duration-200 flex items-center justify-center space-x-2 hover:shadow-xl hover:scale-105 backdrop-blur-sm border border-white/30"
               >
                 <ShoppingCart className="w-5 h-5" />
                 <span>Comprar Dispositivo</span>
               </button>
               <button
-                className="bg-white text-slate-900 px-8 py-4 rounded-lg font-semibold border-2 border-slate-200 hover:border-blue-500 transition-all duration-200 flex items-center justify-center space-x-2"
+                className="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold border-2 border-white hover:bg-white/90 transition-all duration-200 flex items-center justify-center space-x-2"
               >
                 <span>Ver Demo</span>
                 <ArrowRight className="w-5 h-5" />
               </button>
             </div>
 
-            <p className="text-sm text-slate-500">
+            <p className="text-sm text-white/80">
               ✓ Envío gratis · ✓ Configuración en 5 minutos · ✓ Sin mensualidades
             </p>
           </div>
@@ -102,24 +158,24 @@ function App() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white border-y border-slate-100">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white/10 backdrop-blur-md border-y border-white/20 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="text-4xl font-bold text-blue-600 mb-2">15,000+</div>
-              <div className="text-slate-600">Dispositivos Activos</div>
+              <div className="text-4xl font-bold text-yellow-300 mb-2 drop-shadow-lg">15,000+</div>
+              <div className="text-white/90">Dispositivos Activos</div>
             </div>
             <div>
-              <div className="text-4xl font-bold text-blue-600 mb-2">2 seg</div>
-              <div className="text-slate-600">Para Dejar Reseña</div>
+              <div className="text-4xl font-bold text-yellow-300 mb-2 drop-shadow-lg">2 seg</div>
+              <div className="text-white/90">Para Dejar Reseña</div>
             </div>
             <div>
-              <div className="text-4xl font-bold text-blue-600 mb-2">85%</div>
-              <div className="text-slate-600">Tasa de Conversión</div>
+              <div className="text-4xl font-bold text-yellow-300 mb-2 drop-shadow-lg">85%</div>
+              <div className="text-white/90">Tasa de Conversión</div>
             </div>
             <div>
-              <div className="text-4xl font-bold text-blue-600 mb-2">5x</div>
-              <div className="text-slate-600">Más Reseñas al Mes</div>
+              <div className="text-4xl font-bold text-yellow-300 mb-2 drop-shadow-lg">5x</div>
+              <div className="text-white/90">Más Reseñas al Mes</div>
             </div>
           </div>
         </div>
